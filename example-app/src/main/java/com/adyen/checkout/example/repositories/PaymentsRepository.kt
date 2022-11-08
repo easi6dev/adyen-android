@@ -43,7 +43,9 @@ internal class PaymentsRepositoryImpl(private val checkoutApiService: CheckoutAp
 
     override suspend fun getPaymentMethods(paymentMethodsRequest: PaymentMethodsRequest): PaymentMethodsApiResponse? {
         return safeApiCall(
-            call = { checkoutApiService.paymentMethodsAsync(paymentMethodsRequest) }
+            call = {
+                checkoutApiService.paymentMethodsAsync(paymentMethodsRequest)
+            }
         )
     }
 
@@ -52,8 +54,14 @@ internal class PaymentsRepositoryImpl(private val checkoutApiService: CheckoutAp
     }
 
     override suspend fun paymentsRequestAsync(paymentsRequest: PaymentsRequest): JSONObject? {
+        val x = paymentsRequest.combineToJSONObject()
+        val paymentMethodObject = x.getJSONObject("paymentMethod")
+        val amountObject = x.getJSONObject("amount")
+        val n = paymentMethodObject.put("amount", amountObject).put("type", "adyen")
         return safeApiCall(
-            call = { checkoutApiService.paymentsAsync(paymentsRequest.combineToJSONObject()) }
+            call = {
+                checkoutApiService.paymentsAsync(n)
+            }
         )
     }
 

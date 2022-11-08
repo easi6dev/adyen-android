@@ -32,6 +32,8 @@ data class PaymentsRequestData(
     val reference: String,
     val channel: String,
     val lineItems: List<Item>,
+    val recurringProcessingModel: String,
+    val shopperInteraction: String,
     val shopperEmail: String? = null,
-    val threeDS2RequestData: ThreeDS2RequestDataRequest?
+    val threeDS2RequestData: ThreeDS2RequestDataRequest?,
 )

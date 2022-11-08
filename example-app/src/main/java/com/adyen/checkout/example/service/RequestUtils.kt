@@ -109,7 +109,9 @@ fun createPaymentRequest(
         lineItems = LINE_ITEMS,
         shopperEmail = shopperEmail,
         threeDSAuthenticationOnly = threeDSAuthenticationOnly,
-        threeDS2RequestData = if (force3DS2Challenge) ThreeDS2RequestDataRequest() else null
+        threeDS2RequestData = if (force3DS2Challenge) ThreeDS2RequestDataRequest() else null,
+        recurringProcessingModel = "UnscheduledCardOnFile",
+        shopperInteraction = "Ecommerce"
     )
 
     return PaymentsRequest(paymentComponentData, paymentsRequestData)

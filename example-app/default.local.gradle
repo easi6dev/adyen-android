@@ -7,13 +7,13 @@
 android {
     buildTypes {
         debug {
-            buildConfigField "String", "MERCHANT_ACCOUNT", "\"<YOUR_MERCHANT_ACCOUNT>\""
-            buildConfigField "String", "MERCHANT_SERVER_URL", "\"<YOUR_SERVER_URL>\""
-            buildConfigField "String", "API_KEY_HEADER_NAME", "\"<API_KEY_HEADER>\""
+            buildConfigField "String", "MERCHANT_ACCOUNT", "\"MVL_TADA_CARD_ON_FILE_TEST\""
+            buildConfigField "String", "MERCHANT_SERVER_URL", "\"https://393d-96-9-92-46.ngrok.io\""
+            buildConfigField "String", "API_KEY_HEADER_NAME", "\"x-api-key\""
             buildConfigField "String", "CHECKOUT_API_KEY", "\"<YOUR_API_KEY>\""
             buildConfigField "String", "CLIENT_KEY", "\"<YOUR_CLIENT_KEY>\""
-            buildConfigField "String", "SHOPPER_REFERENCE", "\"<SHOPPER_REFERENCE>\""
-            buildConfigField "String", "MERCHANT_RECURRING_SERVER_URL", "\"<YOUR_SERVER_URL>\""
+            buildConfigField "String", "SHOPPER_REFERENCE", "\"f8a1607c-f168-428a-91b8-f391ea65ae6a\""
+            buildConfigField "String", "MERCHANT_RECURRING_SERVER_URL", "\"https://393d-96-9-92-46.ngrok.io\""
         }
 
         release {

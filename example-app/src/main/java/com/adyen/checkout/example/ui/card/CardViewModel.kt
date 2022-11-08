@@ -109,8 +109,8 @@ internal class CardViewModel @Inject constructor(
     private suspend fun handlePaymentResponse(json: JSONObject?) {
         json?.let {
             when {
-                json.has("action") -> {
-                    val action = Action.SERIALIZER.deserialize(json.getJSONObject("action"))
+                !json.isNull("verify") -> {
+                    val action = Action.SERIALIZER.deserialize(json.getJSONObject("verify").getJSONObject("action"))
                     handleAction(action)
                 }
                 else -> _paymentResult.emit("Success: ${json.getStringOrNull("resultCode")}")

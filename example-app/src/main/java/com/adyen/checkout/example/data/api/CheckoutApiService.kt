@@ -34,19 +34,19 @@ internal interface CheckoutApiService {
     @POST("sessions")
     suspend fun sessionsAsync(@Body sessionRequest: SessionRequest): Session
 
-    @POST("paymentMethods")
+    @POST("adyen/paymentMethods")
     suspend fun paymentMethodsAsync(@Body paymentMethodsRequest: PaymentMethodsRequest): PaymentMethodsApiResponse
 
     @POST("payments")
     fun payments(@Body paymentsRequest: JSONObject): Call<JSONObject>
 
-    @POST("payments")
+    @POST("adyen/cards/adyen_step1")
     suspend fun paymentsAsync(@Body paymentsRequest: JSONObject): JSONObject
 
     @POST("payments/details")
     fun details(@Body detailsRequest: JSONObject): Call<JSONObject>
 
-    @POST("payments/details")
+    @POST("adyen/cards/adyen_step2")
     suspend fun detailsAsync(@Body detailsRequest: JSONObject): JSONObject
 
     @POST("paymentMethods/balance")
