@@ -100,7 +100,8 @@ internal class MainViewModel @Inject constructor(
             countryCode = keyValueStorage.getCountry(),
             shopperLocale = keyValueStorage.getShopperLocale(),
             splitCardFundingSources = keyValueStorage.isSplitCardFundingSources()
-        )
+        ),
+        keyValueStorage.getShopperLocale()
     )
 
     private suspend fun getSession() = paymentsRepository.getSessionAsync(

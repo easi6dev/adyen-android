@@ -9,6 +9,7 @@
 package com.adyen.checkout.example.repositories
 
 import com.adyen.checkout.components.model.PaymentMethodsApiResponse
+import com.adyen.checkout.example.BuildConfig
 import com.adyen.checkout.example.data.api.CheckoutApiService
 import com.adyen.checkout.example.data.api.model.BalanceRequest
 import com.adyen.checkout.example.data.api.model.CancelOrderRequest
@@ -24,7 +25,7 @@ import org.json.JSONObject
 
 interface PaymentsRepository {
     suspend fun getSessionAsync(sessionRequest: SessionRequest): Session?
-    suspend fun getPaymentMethods(paymentMethodsRequest: PaymentMethodsRequest): PaymentMethodsApiResponse?
+    suspend fun getPaymentMethods(paymentMethodsRequest: PaymentMethodsRequest, acceptLang: String): PaymentMethodsApiResponse?
     fun paymentsRequest(paymentsRequest: PaymentsRequest): JSONObject?
     suspend fun paymentsRequestAsync(paymentsRequest: PaymentsRequest): JSONObject?
     fun detailsRequest(detailsRequest: JSONObject): JSONObject?
@@ -41,10 +42,10 @@ internal class PaymentsRepositoryImpl(private val checkoutApiService: CheckoutAp
         return safeApiCall { checkoutApiService.sessionsAsync(sessionRequest) }
     }
 
-    override suspend fun getPaymentMethods(paymentMethodsRequest: PaymentMethodsRequest): PaymentMethodsApiResponse? {
+    override suspend fun getPaymentMethods(paymentMethodsRequest: PaymentMethodsRequest, acceptLang: String): PaymentMethodsApiResponse? {
         return safeApiCall(
             call = {
-                checkoutApiService.paymentMethodsAsync(paymentMethodsRequest)
+                checkoutApiService.paymentMethodsAsync(paymentMethodsRequest, acceptLang)
             }
         )
     }
@@ -58,9 +59,10 @@ internal class PaymentsRepositoryImpl(private val checkoutApiService: CheckoutAp
         val paymentMethodObject = x.getJSONObject("paymentMethod")
         val amountObject = x.getJSONObject("amount")
         val n = paymentMethodObject.put("amount", amountObject).put("type", "adyen")
+        val token = "Bearer " + BuildConfig.ACCESS_TOKEN
         return safeApiCall(
             call = {
-                checkoutApiService.paymentsAsync(n)
+                checkoutApiService.paymentsAsync(n, token)
             }
         )
     }
@@ -90,8 +92,9 @@ internal class PaymentsRepositoryImpl(private val checkoutApiService: CheckoutAp
     }
 
     override suspend fun detailsRequestAsync(detailsRequest: JSONObject): JSONObject? {
+        val token = "Bearer " + BuildConfig.ACCESS_TOKEN
         return safeApiCall(
-            call = { checkoutApiService.detailsAsync(detailsRequest) }
+            call = { checkoutApiService.detailsAsync(detailsRequest, token) }
         )
     }
 

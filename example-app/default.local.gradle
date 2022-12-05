@@ -13,6 +13,7 @@ android {
             buildConfigField "String", "CHECKOUT_API_KEY", "\"<YOUR_API_KEY>\""
             buildConfigField "String", "CLIENT_KEY", "\"<YOUR_CLIENT_KEY>\""
             buildConfigField "String", "SHOPPER_REFERENCE", "\"f8a1607c-f168-428a-91b8-f391ea65ae6a\""
+            buildConfigField "String", "ACCESS_TOKEN", "\"<BACKEND_SERVER_ACCESS_TOKEN>\""
             buildConfigField "String", "MERCHANT_RECURRING_SERVER_URL", "\"https://393d-96-9-92-46.ngrok.io\""
         }
 

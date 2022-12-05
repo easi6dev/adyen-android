@@ -19,7 +19,9 @@ import com.adyen.checkout.sessions.model.Session
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 internal interface CheckoutApiService {
 
@@ -35,19 +37,19 @@ internal interface CheckoutApiService {
     suspend fun sessionsAsync(@Body sessionRequest: SessionRequest): Session
 
     @POST("adyen/paymentMethods")
-    suspend fun paymentMethodsAsync(@Body paymentMethodsRequest: PaymentMethodsRequest): PaymentMethodsApiResponse
+    suspend fun paymentMethodsAsync(@Body paymentMethodsRequest: PaymentMethodsRequest, @Header("Accept-Language") acceptLang: String): PaymentMethodsApiResponse
 
     @POST("payments")
     fun payments(@Body paymentsRequest: JSONObject): Call<JSONObject>
 
     @POST("adyen/cards/adyen_step1")
-    suspend fun paymentsAsync(@Body paymentsRequest: JSONObject): JSONObject
+    suspend fun paymentsAsync(@Body paymentsRequest: JSONObject, @Header("Authorization") token: String): JSONObject
 
     @POST("payments/details")
     fun details(@Body detailsRequest: JSONObject): Call<JSONObject>
 
     @POST("adyen/cards/adyen_step2")
-    suspend fun detailsAsync(@Body detailsRequest: JSONObject): JSONObject
+    suspend fun detailsAsync(@Body detailsRequest: JSONObject, @Header("Authorization") token: String): JSONObject
 
     @POST("paymentMethods/balance")
     suspend fun checkBalanceAsync(@Body request: BalanceRequest): JSONObject

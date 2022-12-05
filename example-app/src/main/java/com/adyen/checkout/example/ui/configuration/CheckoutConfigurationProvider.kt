@@ -60,6 +60,7 @@ internal class CheckoutConfigurationProvider @Inject constructor(
         CardConfiguration.Builder(shopperLocale, environment, clientKey)
             .setShopperReference(keyValueStorage.getShopperReference())
             .setAddressConfiguration(getAddressConfiguration())
+            .setShowStorePaymentField(false)
             .build()
 
     private fun getAddressConfiguration(): AddressConfiguration = when (keyValueStorage.isAddressFormEnabled()) {

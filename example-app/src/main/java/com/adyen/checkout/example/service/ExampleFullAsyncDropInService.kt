@@ -192,7 +192,7 @@ class ExampleFullAsyncDropInService : DropInService() {
                 splitCardFundingSources = keyValueStorage.isSplitCardFundingSources(),
                 order = orderRequest
             )
-            val paymentMethods = paymentsRepository.getPaymentMethods(paymentMethodRequest)
+            val paymentMethods = paymentsRepository.getPaymentMethods(paymentMethodRequest, keyValueStorage.getShopperLocale())
             val result = if (paymentMethods != null) {
                 DropInServiceResult.Update(paymentMethods, order)
             } else {

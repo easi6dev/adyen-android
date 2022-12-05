@@ -57,7 +57,8 @@ internal class CardViewModel @Inject constructor(
                 countryCode = keyValueStorage.getCountry(),
                 shopperLocale = keyValueStorage.getShopperLocale(),
                 splitCardFundingSources = keyValueStorage.isSplitCardFundingSources()
-            )
+            ),
+            keyValueStorage.getShopperLocale()
         )?.paymentMethods?.firstOrNull { it.type == "scheme" }
 
         if (paymentMethod == null) CardViewState.Error
